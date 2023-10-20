@@ -49,7 +49,7 @@ class classificador(nn.Module):
         self.flatten = nn.Flatten()
         self.linear1 = nn.Linear(in_features=14 * 14 * 64, out_features=256)
         self.linear2 = nn.Linear(256, 128)
-        self.output = nn.Linear(128, 15)
+        self.output = nn.Linear(128, 5)
 
     def forward(self, X):
         X = self.pool(self.bnorm(self.activation(self.conv1(X))))
