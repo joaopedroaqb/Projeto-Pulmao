@@ -16,7 +16,7 @@ class classificador(nn.Module):
         self.flatten = nn.Flatten()
         self.linear1 = nn.Linear(in_features=14*14*64, out_features=256)
         self.linear2 = nn.Linear(256, 128)
-        self.output = nn.Linear(128, 15)
+        self.output = nn.Linear(128, 5)
 
     def forward(self, X):
         X = self.pool(self.bnorm(self.activation(self.conv1(X))))
@@ -56,7 +56,7 @@ def classificarImagem(nome):
     output = F.softmax(output, dim=1)
     output = output.detach().numpy()
     resultado = np.argmax(output[0])
-    doencas = ["Atelectasis", "Cardiomegaly", "Effusion", "Infiltration", "Mass", "Nodule", "Pneumonia", "Pneumothorax", "Consolidation", "Edema", "Emphysema", "Fibrosis", "Pleural_Thickening", "Normal"]
+    doencas = ['Atelectasis', 'Effusion', 'Infiltration','Nodule', 'Normal']
     print('Nome Imagem: ' + nome.split('\\')[2] + f' Resultado: {doencas[resultado]} Real: '+ nome.split('\\')[1])
 
 pasta = "val"
